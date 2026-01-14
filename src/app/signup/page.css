@@ -1,0 +1,68 @@
+
+.d-flex{
+  background-image: url('/tree.svg');
+    background-size: 500px;     /* shrinks image */
+    background-repeat: no-repeat;
+    background-position: right;
+    background-color: #f0f4f7;     /* fallback color */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.head{
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  z-index: 10;
+}
+
+@media (max-width:992px){
+    .head{
+        padding-left: 5px;
+    }
+}
+.forms{
+    margin-top: 40px;
+}
+input{
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+a {
+    color: #5B6D93;
+  }
+  .box{
+    padding: 0px;
+    width: 25px;
+    cursor: pointer;
+  }
+  .btns{
+    display: flex;
+    margin-top: 30px;
+  }
+  button{
+  color: #ffffff;
+  background-color: #7ED321;
+  font-size: 16px;
+  border-radius: 30px;
+  font-weight: bold;
+  width: 120px;
+  height: 50px;
+  border: none;
+  }
+  p{
+    margin-top: 10px;
+    margin-left: 40px;
+  }
+  .login{
+    margin-top: 10px;
+  }
+
+  

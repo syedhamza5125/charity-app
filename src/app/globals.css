@@ -1,0 +1,283 @@
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+body {
+  background-color: #ffffff;
+}
+
+.containers {
+  box-shadow: 0 4px 6px -1px rgba(69, 17, 190, 0.1);
+}
+
+.PMy {
+  padding-left: 100px;
+  ;
+}
+
+@media (max-width: 992px) {
+  .PMy {
+    padding: 10px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 992px) {
+  .tree {
+    width: 100px;
+  }
+}
+.modal-header{
+  border-bottom: none;
+  padding-top: 30px;
+}
+/* Doante button*/
+.donate {
+  color: #ffffff;
+  background-color: #7ED321;
+  font-size: 30p;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  height: 50px;
+  margin-left: 40px;
+}
+.donate:hover{
+  background-color: #6bb818;
+}
+
+.selectbox{
+background-color: white;
+width: 100%;
+box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+margin-top: 10px;
+padding-top: 5px;
+padding-left: 5px;
+}
+input{
+  width: 98%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+.ambutton{
+  width: 60px;
+  height: 40px;
+  border: 2px solid #ccc;
+  margin: 15px;
+  border-radius: 10px;
+}
+.other{
+   width: 60px;
+  height: 40px;
+  margin: 15px;
+  border: none;
+  border-radius: 7px;
+  color: #ffffff;
+  background-color: #7ED321;
+}
+.form-check{
+  margin-left: 40px;
+  margin-bottom: 5px;
+}
+ /*THis is share button css*/
+.icons {
+  margin: 20px;
+}
+
+.fb {
+  color: #5B6D93;
+  padding-left: 5px;
+  width: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fb:hover {
+  color: rgb(43, 63, 175);
+  border-radius: 50%;
+}
+
+.In {
+  color: #5B6D93;
+  padding-left: 5px;
+  width: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.In:hover {
+  color: #E4405F;
+  border-radius: 50%;
+}
+
+.wa {
+  color: #5B6D93;
+  padding-left: 5px;
+  width: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.wa:hover {
+  color: #25D366;
+  border-radius: 50%;
+}
+
+.tw {
+  color: #5B6D93;
+  padding-left: 5px;
+  width: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tw:hover {
+  color: #1DA1F2;
+  border-radius: 50%;
+}
+
+.p-link {
+  color: #5B6D93;
+  padding-left: 30%;
+}
+.shareLink {
+  width: 70%;
+  padding: 0.75rem;
+  margin: 0px 20px 5px 70px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  color: #5B6D93;
+  font-weight: lighter;
+}
+
+.shareLink__append-inner {
+  position: absolute;
+  right: 80px;
+  top: 90%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+/* Causes */
+.share-img {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.cause {
+  margin-left: 100px;
+}
+
+@media (max-width: 992px) {
+  .cause {
+    margin-left: 5px;
+  }
+}
+
+.waqf-btn {
+  color: #5B6D93;
+  background-color: #ffffff;
+  font-size: 16px;
+  border: 3px solid #ccc;
+  border-radius: 10px;
+  width: 120px;
+  height: 50px;
+}
+
+.waqf-btn:hover {
+  background-color: #7ED321;
+  color: #ffffff;
+  border: 3px solid #ccc;
+}
+.linktag{
+  color: blue;
+}
+.ft-button{
+  margin-right: 45%;
+}
+.ft-button button{
+  color: #ffffff;
+  font-size: 19px;
+  background-color: #7ED321;
+  height: 60px;
+  width: 140px;
+  border: none;
+  border-radius: 10px;
+}
+.plus{
+  height: 50px;
+  width: 160px;
+  color: #ffffff;
+  background-color: #5B6D93;
+  font-size: 40px;
+  border: none;
+  border-radius: 7px;
+  margin-left: 100px;
+
+}
+.modal-title{
+  font-weight: bold;
+}
+/* share buttons in causes*/
+.D-btn {
+  width: 100%;
+  height: 40px;
+  background-color: #7ED321;
+  border-radius: 20px;
+  border: none;
+}
+/* last section*/
+.global{
+  margin-top: 50px;
+  margin-left: 100px;
+}
+.New{
+  align-items: center;
+  width: 20%;
+background-color: white;
+box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+}

@@ -6,7 +6,7 @@ export default function Addwaqf() {
             <div className="cause d-flex align-items-center gap-4">
                 <h1>Waqf Causes</h1>
                 <button type="button" className="waqf-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXL">
-                    +Add cause
+                    +Add caus
                 </button>
                 <div className="modal fade" id="exampleModalXL" tabindex="-1" aria-labelledby="exampleModalXLLabel" aria-hidden="true">
                     <div className="modal-dialog modal-xl  modal-dialog-scrollable">

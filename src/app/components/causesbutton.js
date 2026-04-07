@@ -5,15 +5,15 @@ export default function Addwaqf() {
         <div className="cause mb-5">
             <div className="cause d-flex align-items-center gap-4">
                 <h1>Waqf Causes</h1>
-                <button type="button" className="waqf-btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalXL">
-                    +Add caus
+                <button type="button" className="waqf-btn btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModalXL">
+                    +Add cause
                 </button>
-                <div className="modal fade" id="exampleModalXL" tabindex="-1" aria-labelledby="exampleModalXLLabel" aria-hidden="true">
+                <div className="modal fade" id="exampleModalXL"  aria-labelledby="exampleModalXLLabel" aria-hidden="true">
                     <div className="modal-dialog modal-xl  modal-dialog-scrollable">
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h2 className="modal-title" id="exampleModalXLLabel">Add charities or causes that you care about.</h2>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
                                 <form>
@@ -21,7 +21,7 @@ export default function Addwaqf() {
                                     <input type="text" placeholder="Search non-profit Causes" />
                                 </form>
                             <div className=" ft-button modal-footer">
-                                <button>+ Add Cause</button>
+                                <button className="btn btn-success">+ Add Cause</button>
                             </div>
                         </div>
                     </div>

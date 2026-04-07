@@ -1,7 +1,7 @@
 export default function handler(req, res) {
   // Example data, real me DB se fetch kar sakte ho
   const settingsData = {
-    theme: "dark",
+    theme: "light",
     notifications: true,
     language: "English",
   };

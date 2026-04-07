@@ -2,7 +2,9 @@
 import { useState } from 'react';
 import './page.css';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 export default function Signup() {
+  const router = useRouter();
   const [Email, setemail] = useState('');
   const [Password, setpassword] = useState('');
   const [ConfirmPassword, setconfirmpassword] = useState('');
@@ -13,23 +15,21 @@ export default function Signup() {
       alert("Passwords do not match");
       return;
     }
-    const res = await fetch('/api/users/register', {
+    const res = await fetch('api/users/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name: 'Hamza', email: Email, password: Password})
+      body: JSON.stringify({ name: 'hamza', email: Email, password: Password,})
     });
     const data = await res.json();
-    const termagreed = document.getElementById('termagreed').checked;
     if(res.ok){
-      {
-        if(!termagreed)
-          alert("You must agree to the terms and conditions");
-    }
-      alert("Signup successful!");
+      localStorage.setItem("userEmail", data.data.email);
+      localStorage.setItem("userName", data.data.name);
+      localStorage.setItem("user", JSON.stringify(data.data));
+      router.push('/dashboard');
     } else {
-      alert("Signup failed: " + data.message);
+      alert("Signup failed: " + data.message );
     }
      
   };
@@ -45,7 +45,7 @@ export default function Signup() {
           <input type="password" placeholder="password" aria-label="password" onChange={(e) => setpassword(e.target.value)} />
           <h6>Confirm-password</h6>
           <input type="password" placeholder="confirm-password" aria-label="confirm-password" onChange={(e) => setconfirmpassword(e.target.value)} />
-         <button type='submit'>Sign Up</button>
+         <button type='submit' className="btn btn-success">Sign Up</button>
         </form>
         <input className='box' type="checkbox" id="termagreed" value="" aria-label="..."></input> I accept the{" "} <a href="/files/terms_and_conditions.pdf" target="_blank" rel="noopener noreferrer">
           Terms & Conditions {""}

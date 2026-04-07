@@ -1,58 +1,181 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
 export default function Donate() {
-    return (
-        <>
-        <div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
-  <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h1 className="modal-title fs-5" id="exampleModalToggleLabel"><img src="./donatehand.png" width="30px" style={{ borderRadius: '100%'}}/>   Doante</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        <div className="d-flex ">
-         <div ><h6 style={{ color: '#5B6D93' }}>Waqf's Name</h6></div>
-           <div><h6 style={{ color: '#5B6D93', paddingLeft: '40px' }}>Hamza</h6></div>
+
+  const [causeId, setCauseId] = useState("");
+  const [amount, setAmount] = useState('');
+  const [message, setMessage] = useState('');
+  const [userName, setUserName] = useState('');
+
+  const causes = [
+    { name: 'Most Needed', id: 'Most Needed' },
+    { name: 'Food Poverty', id: 'Food Poverty' },
+    { name: 'Education', id: 'Education' },
+    { name: 'Financial', id: 'Financial' },
+    { name: 'Community', id: 'Community' },
+  ];
+
+  // Load username
+  useEffect(() => {
+    const name = localStorage.getItem('userName');
+    if (name) setUserName(name);
+  }, []);
+
+  // Donation handler
+  const handleDonate = async () => {
+
+    if (!amount || amount <= 0) {
+      setMessage('Please enter a valid amount');
+      return;
+    }
+
+    if (!causeId) {
+      setMessage("Please select a cause");
+      return;
+    }
+
+    try {
+
+      const userId = localStorage.getItem("userId");
+
+      const response = await fetch('/api/donate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          userId,
+          cause: causeId,
+          amount: Number(amount)
+        })
+      });
+
+      const donateData = await response.json();
+
+      if (donateData.success) {
+        setMessage("Donation submitted successfully!");
+        setAmount('');
+        alert("Thank you for your donation!");
+      } else {
+        setMessage("Donation failed");
+      }
+    } catch (error) {
+      setMessage("Server error.");
+    }
+  };
+
+  return (
+    <>
+      {/* FIRST MODAL */}
+      <div className="modal fade" id="exampleModalToggle" tabIndex="-1">
+
+        <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div className="modal-content">
+
+            <div className="modal-header">
+              <h1 className="modal-title fs-5">
+                <img src="./donatehand.png" width="30" style={{ borderRadius: "100%" }} /> Donate
+              </h1>
+
+              <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div className="modal-body">
+
+              <h6 style={{ color: '#5B6D93' }}>Waqf's Name</h6>
+              <h6 style={{ color: '#5B6D93' }}>{userName}</h6>
+
+              <h5 style={{ color: '#5B6D93' }}>Select Cause</h5>
+
+              <select
+                className="form-select"
+                value={causeId}
+                onChange={(e) => setCauseId(e.target.value)}
+              >
+                <option value="">-- Select Cause --</option>
+
+                {causes.map((item, index) => (
+                  <option key={index} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+
+              </select>
+
+              <h6 style={{ color: '#5B6D93' }}>Choose donation amount</h6>
+
+              <div className="d-flex gap-2 mb-2">
+                <button type="button" className="ambutton" onClick={() => setAmount(10)}>$10</button>
+                <button type="button" className="ambutton" onClick={() => setAmount(20)}>$20</button>
+                <button type="button" className="ambutton" onClick={() => setAmount(30)}>$30</button>
+                <button type="button" className="ambutton" onClick={() => setAmount(50)}>$50</button>
+              </div>
+
+              <input
+                type="number"
+                placeholder="Enter custom amount"
+                className="form-control"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+              />
+
+            </div>
+
+            <div className="modal-footer">
+              <button
+                className="btn btn-success"
+                data-bs-target="#exampleModalToggle2"
+                data-bs-toggle="modal"
+              >
+                Proceed
+              </button>
+            </div>
+
+          </div>
         </div>
-        <div className="selectbox">
-          <form className="form">
-            <h5 style={{ color: '#5B6D93' }}>Select cause</h5>
-            <input type="causes" placeholder="Most Needed" aria-label="cause" />
-             <h6 style={{ color: '#5B6D93' }}>Choose donation amount</h6>
-             <div className="d-flex">
-              <button className="ambutton">$10</button>
-              <button className="ambutton">$20</button>
-              <button className="ambutton">$30</button>
-              <button className="ambutton">$50</button>
-              <button className="other">Others</button>
-             </div>
-            <input type="amount" placeholder="Enter custom amount"/>
-          </form>
+      </div>
+
+      {/* SECOND MODAL */}
+      <div className="modal fade" id="exampleModalToggle2" tabIndex="-1">
+
+        <div className="modal-dialog modal-dialog-centered">
+
+          <div className="modal-content">
+
+            <div className="modal-header">
+              <h5>Donate</h5>
+              <button className="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div className="modal-body text-center">
+
+              <h5>Total Donation</h5>
+              <h3>${amount}</h3>
+
+              {message && <p className="text-success mt-2">{message}</p>}
+
+            </div>
+
+            <div className="modal-footer">
+              <button className="btn btn-success" onClick={handleDonate}>
+                Donated
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
-      <div className="modal-footer">
-        <button className="donate btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Proceed</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div className="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabIndex="-1">
-  <div className="modal-dialog modal-dialog-centered ">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h1 className="modal-title fs-5" id="exampleModalToggleLabel2"><img src="./donatehand.png" width="30px" style={{ borderRadius: '100%'}}/>   Doante</h1>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-       </div>
-      <div className="modal-footer">
-        <button className="btn btn-primary">Donated</button>
-      </div>
-    </div>
-  </div>
-</div>
-<button className="donate btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Donate</button>
-            </>
-    );
+
+      {/* MAIN BUTTON */}
+      <button
+        className="donate btn btn-success"
+        data-bs-target="#exampleModalToggle"
+        data-bs-toggle="modal"
+      >
+        Donate
+      </button>
+
+    </>
+  );
 }

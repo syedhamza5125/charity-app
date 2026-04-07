@@ -2,26 +2,45 @@
 import { useState } from  'react';
 import Link from 'next/link';
 import './page.css';
+import { useRouter } from 'next/navigation';
 export default function Login() {
+  const router = useRouter();
   const [Email, setemail] = useState('');
   const [Password, setpassword] = useState('');
+  const [loading, setloading] = useState(false);
+  const [error, seterror] = useState(null);
   const handlelogin = async (e) => {
     e.preventDefault();
+    setloading(true);
+    seterror(null);
+    try {
     const res = await fetch('/api/users/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ name: 'Hamza', email: Email, password: Password })
+      body: JSON.stringify({ email: Email, password: Password }),
+      credentials: 'include',
     });
-    console.log(res.status);
     const data = await res.json();
+    console.log(data);
     if (res.ok) {
-      alert("Login successful");
+       const userId = data.data._id;
+
+  localStorage.setItem("userId", userId);
+  localStorage.setItem("userEmail", data.data.email);
+  localStorage.setItem("userName", data.data.name);
+  localStorage.setItem("user", JSON.stringify(data.data));
+      
+      router.push('/dashboard');
     } else {
-      alert("login failed");
+      seterror(data.message || 'Login failed');
     }
-  };
+  } catch (err) {
+        seterror('some thing went wrong' );
+  }
+      setloading(false);
+     };
   return (
     <div className="login-bg">
       <div className="login-popup">
@@ -51,9 +70,10 @@ export default function Login() {
                   onChange={(e)=>setpassword(e.target.value)}
                   required
                 />
+                {error && <p className="error-message">{error}</p>}
               </div>
               <div className="rw">
-              <button type="submit" className="sign-in">Login</button>
+              <button type="submit" className="sign-in btn btn-success" disabled={loading}>{loading ? "Logging in..." : "Login"}</button>
                 <p><a href="/forgetpassword">Forgot password?</a></p>
                 </div>
                 <br />

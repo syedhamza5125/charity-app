@@ -1,37 +1,73 @@
 'use client'
 import React, { useState } from "react";
-export default function Third(){
-    return(
-        <div className="global">
-              <h2 className="mb-4">Global Leaderboard</h2>
-              <div className="table-responsive">
-                <table className="table table-striped table-hover">
-                  <thead className="table-light">
-                    <tr>
-                      <th>Waqf Name</th>
-                      <th>Balance</th>
-                      <th>Income Generated</th>
-                      <th>Location</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {[
-                      { name: "Mirza’s Waqf", balance: "£2040.00", income: "£200.00", location: "London" },
-                      { name: "Ali Family Waqf", balance: "£1010.00", income: "£300.00", location: "Dubai" },
-                      { name: "Health Waqf", balance: "£810.00", income: "£400.00", location: "London" },
-                      { name: "Education Waqf", balance: "£740.00", income: "£160.00", location: "pakistan" },
-                      { name: "Hospital Waqf", balance: "£640.00", income: "£260.00", location: "Sri lanka" },
-                    ].map((waqf) => (
-                      <tr key={waqf.name}>
-                        <td>{waqf.name}</td>
-                        <td>{waqf.balance}</td>
-                        <td>{waqf.income}</td>
-                        <td>{waqf.location}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+
+export default function Third() {
+
+    const [comment, setComment] = useState("");
+    const [submittedComment, setSubmittedComment] = useState("");
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setSubmittedComment(comment);
+        setComment("");
+    };
+
+    return (
+        <div className="about my-4 bg-success bg-opacity-25 rounded shadow-sm h-100">
+
+            <div className="row g-4">
+
+                {/* About Charity Section */}
+                <div className="col-12 col-lg-6">
+                    <div className="p-4 ">
+                        <h3 className="mb-3 text-success">About Our Charity:</h3>
+                        <p className="text-dark">
+                            Our charity organization works to support families in need
+                            through digital donations. Your contribution helps provide
+                            food, education, and medical assistance to underprivileged
+                            communities. Every donation makes a real difference.
+                        </p>
+                    </div>
+                </div>
+
+                {/* Feedback Section */}
+                <div className="col-12 col-lg-6">
+                    <div className="p-4 bg-opacity-25 rounded shadow-sm h-100">
+                        <h3 className="mb-3 text-success">Leave Your Feedback</h3>
+
+                        <form onSubmit={handleSubmit} className="d-flex flex-column">
+                            <textarea
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                placeholder="Write your feedback here..."
+                                className="form-control mb-3"
+                                rows="6"
+                                required
+                            />
+                            <button type="submit" className="btn btn-success">
+                                Submit
+                            </button>
+                        </form>
+
+                        {submittedComment && (
+                            <div className="mt-3 p-3 bg-white border rounded">
+                                <p className="mb-0">
+                                    <strong>Your Feedback:</strong> {submittedComment}
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
             </div>
+
+            {/* Footer */}
+            <footer className="mt-5 py-3 bg-dark text-white text-center rounded">
+                <p className="mb-0">
+                    © 2026 Charity Organization | All Rights Reserved
+                </p>
+            </footer>
+
+        </div>
     );
 }
